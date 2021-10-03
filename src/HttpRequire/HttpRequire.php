@@ -3,6 +3,7 @@
 namespace Bubu\Http\HttpRequire;
 
 use Bubu\Http\HttpRequire\Exception\HttpRequireException;
+use Bubu\Http\Reponse\Reponse;
 
 class HttpRequire
 {
@@ -19,8 +20,7 @@ class HttpRequire
         } else {
             if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') {
                 $location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                header('HTTP/1.1 301 Moved Permanently');
-                header('Location: ' . $location);
+                (new Reponse)->reponse301()->createHeader('Location', $location)->setup()->send();
                 exit;
             }
         }
