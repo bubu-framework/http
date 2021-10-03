@@ -1,0 +1,26 @@
+{
+    "name": "bubu-framework/http",
+    "description": "Http part (bubu framework)",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/bubu-framework/http",
+    "authors": [
+        {
+            "name": "QuentinBubu",
+            "email": "QuentinBubu.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bubu\\Http\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bubu\\Http\\Tests\\" : "tests/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    }
+}
