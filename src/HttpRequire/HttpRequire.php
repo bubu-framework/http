@@ -16,7 +16,7 @@ class HttpRequire
     public static function https(bool $throwException = false)
     {
         if ($throwException) {
-            throw new HttpRequireException('HTTPS is required');
+            throw new HttpRequireException('HTTPS is required', 403.4);
         } else {
             if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') {
                 $location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
