@@ -10,15 +10,15 @@ class Session
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
 
-            if (is_null($sessionLifetime)) $sessionLifetime = $_ENV['SESSION_DURATION'];
+            if (is_null($sessionLifetime)) $sessionLifetime = $_ENV['SESSION_DURATION'] ?? 0;
 
             ini_set('session.gc_maxlifetime', $sessionLifetime * 60 * 60 * 24);
             session_set_cookie_params($sessionLifetime * 60 * 60 * 24);
 
-            if (is_null($sessionCache))  $sessionCache = $_ENV['HTTP_EXPIRES'];
+            if (is_null($sessionCache))  $sessionCache = $_ENV['HTTP_EXPIRES'] ?? 0;
 
             session_cache_expire($sessionCache);
-            session_cache_limiter($_ENV['SESSION_CACHE_LIMITER']);
+            session_cache_limiter($_ENV['SESSION_CACHE_LIMITER'] ?? 'private');
             session_start();
         }
     }
