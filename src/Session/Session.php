@@ -23,11 +23,40 @@ class Session
         }
     }
 
+    /**
+     * start a new session
+     *
+     * @param integer|null $sessionCache
+     * @param integer|null $sessionLifetime
+     * @return Session
+     */
     public static function start(?int $sessionCache = null, ?int $sessionLifetime = null): Session
     {
         return new Session($sessionCache, $sessionLifetime);
     }
 
+    /**
+     * Verify if a key is registre
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public static function exists(string $key): bool
+    {
+        self::start();
+        if (isset($_SESSION[$key])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * get a value for key
+     *
+     * @param string $key
+     * @return mixed
+     */
     public static function get(string $key): mixed
     {
         self::start();
@@ -38,24 +67,50 @@ class Session
         }
     }
 
+    /**
+     * return all session
+     *
+     * @return array
+     */
     public static function getAll(): array
     {
         self::start();
         return $_SESSION;
     }
 
+    /**
+     * Set new value / create key
+     *
+     * @param string $key
+     * @param mixed $data
+     * @return void
+     */
     public static function set(string $key, mixed $data): void
     {
         self::start();
         $_SESSION[$key] = $data;
     }
 
+    /**
+     * Add value for array
+     *
+     * @param string $key
+     * @param mixed $data
+     * @return void
+     */
     public static function add(string $key, mixed $data): void
     {
         self::start();
         $_SESSION[$key][] = $data;
     }
 
+    /**
+     * Push value in array (array_merge_recursive)
+     *
+     * @param string $key
+     * @param mixed $data
+     * @return void
+     */
     public static function push(string $key, mixed $data): void
     {
         self::start();
@@ -63,12 +118,24 @@ class Session
         $_SESSION[$key] = array_merge_recursive($_SESSION[$key], $data);
     }
 
+    /**
+     * Delete value
+     *
+     * @param string $key
+     * @return void
+     */
     public static function delete(string $key): void
     {
         self::start();
         unset($_SESSION[$key]);
     }
 
+    /**
+     * Change lifetime of a session
+     *
+     * @param integer $newLifetime
+     * @return void
+     */
     public static function changeSessionLifetime(int $newLifetime)
     {
         $tempSession = $_SESSION;
@@ -79,6 +146,11 @@ class Session
         $_SESSION = $tempSession;
     }
 
+    /**
+     * Destroy a session
+     *
+     * @return void
+     */
     public static function destroy(): void
     {
         session_reset();
