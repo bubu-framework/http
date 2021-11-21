@@ -97,4 +97,24 @@ class Reponse
     {
         echo $this->content;
     }
+
+    /**
+     * Return http cpde
+     *
+     * @return integer
+     */
+    public function getHttpCode(): int
+    {
+        return $this->httpCode;
+    }
+
+    /**
+     * Return http message
+     *
+     * @return string
+     */
+    public function getHttpMessage(): string
+    {
+        return $this->message;
+    }
 }
