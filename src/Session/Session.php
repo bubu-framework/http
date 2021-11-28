@@ -147,6 +147,17 @@ class Session
     }
 
     /**
+     * Clean session data
+     *
+     * @return void
+     */
+    public static function clean(): void
+    {
+        self::start();
+        foreach ($_SESSION as $key => $value) unset($_SESSION[$key]);
+    }
+
+    /**
      * Destroy a session
      *
      * @return void
