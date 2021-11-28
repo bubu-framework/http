@@ -164,6 +164,7 @@ class Session
      */
     public static function destroy(): void
     {
+		self::clean();
         session_reset();
         session_unset();
         session_destroy();
