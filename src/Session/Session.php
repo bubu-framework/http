@@ -68,6 +68,19 @@ class Session
     }
 
     /**
+     * get a value for key without error
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public static function getSafe(string $key): mixed
+    {
+        self::start();
+        if (isset($_SESSION[$key])) return $_SESSION[$key];
+        else return null;
+    }
+
+    /**
      * return all session
      *
      * @return array
